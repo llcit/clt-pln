@@ -1,0 +1,41 @@
+{% extends 'pln/base.html' %}
+
+{% block content %}
+<!-- Page Contents -->
+<div class="container">
+  <div class="row">	
+    {% for item in lists %}
+    <div class="pln app">
+      <h3 class="app-name">{{ item.name }}</h3>
+      {{ item.description }}<br>
+      <img class="img-responsive pln app icon" src="{{ item.icon }}" alt=""><br>
+      <a href="{{ item.privacy }}">{{ item.privacy }}</a><br>
+      <a href="{{ item.tutorial }}">{{ item.tutorial }}</a><br>
+      <a href="{{ item.url }}">{{ item.url }}</a><br>
+      {{ item.price }}<br>
+      {{ item.support }}<br>
+      {{ itme.testimonial }}
+      {% for function in item.functions.all %}
+      {{ function }}
+      {% endfor %}
+      <br>
+      {% for format in item.formats.all %}
+      {{ format }}
+      {% endfor %}
+      <br>
+      {% for type in item.types.all %}
+      {{ type }}
+      {% endfor %}
+      <br>
+    </div>
+    {% if user.is_authenticated %}
+    <div class="pln edit">
+      <a class="btn btn-default" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
+      <a class="btn btn-default" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
+    </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <!-- /.row -->
+</div>
+{% endblock content %}

@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <!-- header -->
+  <head>
+    <meta character="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Personal Learning Network">
+    <meta name="author" content="Songmin Kim">
+    <title>Personal Learning Network</title>
+  </head>
+  <body>
+    <!-- authentication check for editing -->
+    {% if user.is_authenticated %}
+    <div class="pln-admin-menu">
+      <a href="{% url 'app_new' %}">New App</a>
+      <a href="{% url 'format_new' %}">New Format</a>
+      <a href="{% url 'function_new' %}">New Function</a>
+      <a href="{% url 'type_new' %}">New Type</a>
+    </div>
+    {% endif %}
+    
+    <!-- pln contents -->
+    <div class="content container">
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>
+

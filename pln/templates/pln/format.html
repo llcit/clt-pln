@@ -1,0 +1,10 @@
+{% extends 'pln/base.html' %}
+{% block content %}
+<h3>{{ item.name }}</h3>
+{% if user.is_authenticated %}
+<div class="pln edit">
+  <a class="btn btn-default" href="{% url 'format_edit' item_id=item.id %}">Edit</a>
+  <a class="btn btn-default" href="{% url 'format_delete' item_id=item.id %}">Delete</a>
+</div>
+{% endif %}
+{% endblock %}
