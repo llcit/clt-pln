@@ -8,7 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Personal Learning Network">
     <meta name="author" content="Songmin Kim">
+    
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    
+    <!-- Bootstrap Theme CSS -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+    
+    <!-- PLN Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/pln.css' %}">
+    
     <title>Personal Learning Network</title>
+
   </head>
   <body>
     <!-- authentication check for editing -->
@@ -26,6 +37,12 @@
       {% block content %}
       {% endblock %}
     </div>
+
+    <!-- JQuery -->
+    <script src="{% static "js/jquery.min.js" %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
   </body>
 </html>
 
