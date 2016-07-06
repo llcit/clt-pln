@@ -1,35 +1,137 @@
 {% extends 'pln/base.html' %}
 {% block content %}
 <!-- Page Contents -->
-<div class="container">
-  <div class="row">
-    <div class="pln app">
-	<h3>{{ item.name }}</h3>
-	{{ item.description }}<br>
-	<img class="img-responsive pln app icon" src="{{ item.icon }}" alt=""><br>
-	<a href="{{ item.privacy }}">{{ item.privacy }}</a><br>
-	<a href="{{ item.tutorial }}">{{ item.tutorial }}</a><br>
-	<a href="{{ item.url }}">{{ item.url }}</a><br>
-	{{ item.price }}<br>
-	{{ item.support }}<br>
-	{{ itme.testimonial }}
-	{% for function in item.functions.all %}
-		{{ function }}<br>
-	{% endfor %}
-	{% for format in item.formats.all %}
-		{{ format }}<br>
-	{% endfor %}
-	{% for type in item.types.all %}
-		{{ type }}<br>
-	{% endfor %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="panel panel-primary pln app">
+
+      <!-- panel header -->
+      <div style="height: 78px;" class="panel-heading">
+	<div class="media">
+	  <div class="media-left">
+	    <a href="{{ item.url }}">
+	      <img class="img-responsive pln app icon" src="{{ item.icon }}" width="64" alt="App Icon N/A">
+	    </a>
+	  </div>
+	  <div class="media-body">
+	    <h4 class="media-heading">{{ item.name }}</h4>
+	  </div>
+	</div>
+      </div>
+      <!-- ./panel header -->
+
+      <!-- panel body -->
+      <div  class="panel-body">
+	{{ item.description }}
+	<hr>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Privacy:
+	  </div>
+	  <div class="col-md-9">
+	    <a href="{{ item.privacy }}">{{ item.privacy }}</a>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Tutorial:
+	  </div>
+	  <div class="col-md-9">
+	    <a href="{{ item.tutorial }}">{{ item.tutorial }}</a>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    URL:
+	  </div>
+	  <div class="col-md-9">
+	    <a href="{{ item.url }}">{{ item.url }}</a>
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Price:
+	  </div>
+	  <div class="col-md-9">
+	    {{ item.price }}
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Support:
+	  </div>
+	  <div class="col-md-9">
+	    {{ item.support }}
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Testimonial:
+	  </div>
+	  <div class="col-md-9">
+	    {{ itme.testimonial }}
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Functions:
+	  </div>
+	  <div class="col-md-9">
+	    {% for function in item.functions.all %}
+	    {{ function }}
+	    {% if not forloop.last %},{% endif %}
+	    {% endfor %}
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Formats:
+	  </div>
+	  <div class="col-md-9">
+	    {% for format in item.formats.all %}
+	    {{ format }}
+	    {% if not forloop.last %},{% endif %}
+	    {% endfor %}
+	  </div>
+	</div>
+
+	<div class="row">
+	  <div class="col-md-3">
+	    Types:
+	  </div>
+	  <div class="col-md-9">
+	    {% for type in item.types.all %}
+	    {{ type }}
+	    {% if not forloop.last %},{% endif %}
+	    {% endfor %}
+	  </div>
+	</div>
+      </div>
+      <!-- ./panel body -->
+
+      <!-- panel footer -->
+      <div class="panel-footer">
+	<div class="admin-menu">
+	  {% if user.is_authenticated %}
+	  <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
+	  <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
+	  {% endif %}
+	</div>
+      </div>
+      <!-- ./panel footer -->
+      
     </div>
-    {% if user.is_authenticated %}
-    <div class="pln edit">
-      <a class="btn btn-default" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
-      <a class="btn btn-default" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
-    </div>
-    {% endif %}
+    <!-- ./panel -->
   </div>
-  <!-- /.row -->
+  <!-- ./column -->
 </div>
+<!-- row -->
 {% endblock %}
