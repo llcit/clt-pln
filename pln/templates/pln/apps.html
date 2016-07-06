@@ -1,36 +1,125 @@
 {% extends 'pln/base.html' %}
 
 {% block content %}
-<!-- Page Contents -->	
-{% for item in lists %}
-<div class="panel panel-primary pln app">
-  <div class="panel-heading">{{ item.name }}</div>
-  <div class="panel-body">
-    {{ item.description }}<br>
-    <img class="img-responsive pln app icon" src="{{ item.icon }}" alt=""><br>
-    <a href="{{ item.privacy }}">{{ item.privacy }}</a><br>
-    <a href="{{ item.tutorial }}">{{ item.tutorial }}</a><br>
-    <a href="{{ item.url }}">{{ item.url }}</a><br>
-    {{ item.price }}<br>
-    {{ item.support }}<br>
-    {{ itme.testimonial }}
-    {% for function in item.functions.all %}
-    {{ function }}
+<!-- Page Contents -->
+<div class="row">
+    {% for item in lists %}
+    <div class="col-md-4">
+      <div class="panel panel-primary pln app">
+	<!-- panel header -->
+	<div class="panel-heading">
+	  <div class="row">
+	    <div class="col-md-4">
+	      <img class="img-responsive pln app icon" src="{{ item.icon }}" width="62" alt="App Icon N/A">
+	    </div>
+	    <div class="col-md-8">
+	      <h4>{{ item.name }}</h4>
+	    </div>
+	  </div>
+	</div>
+
+	<!-- panel body -->
+	<div class="panel-body">
+	  {{ item.description | truncatewords:7 }}
+	  <a href="{% url 'app' item_id=item.id %}"> Read More</a>
+	  <hr>
+
+	  <div class="row">
+	    <div class="col-md-2">
+	      Privacy:
+	    </div>
+	    <div class="col-md-10">
+	      <a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-2">
+	      Tutorial:
+	    </div>
+	    <div class="col-md-10">
+	      <a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-2">
+	      URL:
+	    </div>
+	    <div class="col-md-10">
+	      <a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-2">
+	      Price:
+	    </div>
+	    <div class="col-md-10">
+	      {{ item.price }}
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-2">
+	      Support:
+	    </div>
+	    <div class="col-md-10">
+	      {{ item.support }}
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-4">
+	      Testimonial:
+	    </div>
+	    <div class="col-md-8">
+	      {{ itme.testimonial }}
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-3">
+	      Functions:
+	    </div>
+	    <div class="col-md-9">
+	      {% for function in item.functions.all %}
+	      {{ function }}
+	      {% endfor %}
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-3">
+	      Formats:
+	    </div>
+	    <div class="col-md-9">
+	      {% for format in item.formats.all %}
+	      {{ format }},
+	      {% endfor %}
+	    </div>
+	  </div>
+
+	  <div class="row">
+	    <div class="col-md-3">
+	      Types:
+	    </div>
+	    <div class="col-md-9">
+	      {% for type in item.types.all %}
+	      {{ type }},
+	      {% endfor %}
+	    </div>
+	  </div>
+	  
+	  <div class="admin-menu">
+	    {% if user.is_authenticated %}
+	    <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
+	    <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
+	    {% endif %}
+	  </div>
+	</div>
+      </div>
+    </div>
     {% endfor %}
-    <br>
-    {% for format in item.formats.all %}
-    {{ format }}
-    {% endfor %}
-    <br>
-    {% for type in item.types.all %}
-    {{ type }}
-    {% endfor %}
-    <br>
-    {% if user.is_authenticated %}
-    <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
-    <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
-    {% endif %}
   </div>
-</div>
-{% endfor %}
 {% endblock content %}
