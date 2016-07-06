@@ -3,139 +3,145 @@
 {% block content %}
 <!-- Page Contents -->
 <div class="row">
+  
+  <!-- accordion -->
+  <a href="#" class="btn btn-primary btn-sm openall">open all</a> <a href="#" class="btn btn-primary btn-sm closeall">close all</a>
+  <hr>
+  <div class="panel-group" id="accordion1">
     {% for item in lists %}
     <div class="col-md-4">
-      <div class="panel panel-primary pln app">
-
+      <div class="panel panel-info pln app">
+	
 	<!-- panel header -->
-	<div style="height: 78px;" class="panel-heading">
-	  <div class="media">
-	    <div class="media-left">
-	      <a href="{{ item.url }}">
+	<div style="height: 82px;" class="panel-heading">
+	  <a data-toggle="collapse" data-parent="#accordion1" href="#{{ item.id }}">
+  	    <div class="media">
+	      <div class="media-left">
 		<img class="img-responsive pln app icon" src="{{ item.icon }}" width="64" alt="App Icon N/A">
-	      </a>
+	      </div>
+	      <div class="media-body">
+		<h4 style="font-color: white;" class="media-heading">{{ item.name }}</h4>
+	      </div>
 	    </div>
-	    <div class="media-body">
-	      <h4 class="media-heading">{{ item.name }}</h4>
-	    </div>
-	  </div>
+	  </a>
 	</div>
-	<!-- ./panel header -->
+	<!-- /.panel header -->
 
-	<!-- panel body -->
-	<div  style="height: 350px;"class="panel-body">
-	  {{ item.description | truncatewords:7 }}
-	  <a href="{% url 'app' item_id=item.id %}"> Read More</a>
-	  <hr>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Privacy:
+	<!-- collapse -->
+	<div id="{{ item.id }}" class="panel-collapse collapse">
+	  <!-- panel body -->
+	  <div class="panel-body">
+	    {{ item.description }}
+	    <a href="{% url 'app' item_id=item.id %}"> Read More</a>
+	    <hr>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Privacy:
+	      </div>
+	      <div class="col-md-9">
+		<a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
+	      </div>
 	    </div>
-	    <div class="col-md-9">
-	      <a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Tutorial:
+	      </div>
+	      <div class="col-md-9">
+		<a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		URL:
+	      </div>
+	      <div class="col-md-9">
+		<a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Price:
+	      </div>
+	      <div class="col-md-9">
+		{{ item.price }}
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Support:
+	      </div>
+	      <div class="col-md-9">
+		{{ item.support }}
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Testimonial:
+	      </div>
+	      <div class="col-md-9">
+		{{ itme.testimonial }}
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Functions:
+	      </div>
+	      <div class="col-md-9">
+		{% for function in item.functions.all %}
+		{{ function }}
+		{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Formats:
+	      </div>
+	      <div class="col-md-9">
+		{% for format in item.formats.all %}
+		{{ format }}
+		{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	      </div>
+	    </div>
+	    
+	    <div class="row">
+	      <div class="col-md-3">
+		Types:
+	      </div>
+	      <div class="col-md-9">
+		{% for type in item.types.all %}
+		{{ type }}
+		{% if not forloop.last %},{% endif %}
+		{% endfor %}
+	      </div>
 	    </div>
 	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Tutorial:
-	    </div>
-	    <div class="col-md-9">
-	      <a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      URL:
-	    </div>
-	    <div class="col-md-9">
-	      <a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Price:
-	    </div>
-	    <div class="col-md-9">
-	      {{ item.price }}
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Support:
-	    </div>
-	    <div class="col-md-9">
-	      {{ item.support }}
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Testimonial:
-	    </div>
-	    <div class="col-md-9">
-	      {{ itme.testimonial }}
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Functions:
-	    </div>
-	    <div class="col-md-9">
-	      {% for function in item.functions.all %}
-	      {{ function }}
-	      {% if not forloop.last %},{% endif %}
-	      {% endfor %}
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Formats:
-	    </div>
-	    <div class="col-md-9">
-	      {% for format in item.formats.all %}
-	      {{ format }}
-	      {% if not forloop.last %},{% endif %}
-	      {% endfor %}
-	    </div>
-	  </div>
-
-	  <div class="row">
-	    <div class="col-md-3">
-	      Types:
-	    </div>
-	    <div class="col-md-9">
-	      {% for type in item.types.all %}
-	      {{ type }}
-	      {% if not forloop.last %},{% endif %}
-	      {% endfor %}
-	    </div>
-	  </div>
-	</div>
-	<!-- ./panel body -->
-
+	  <!-- /.panel body -->
+	</div><!-- /.panel-collapse -->
+	
+	{% if user.is_authenticated %}
 	<!-- panel footer -->
 	<div class="panel-footer">
 	  <div class="admin-menu">
-	    {% if user.is_authenticated %}
 	    <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
 	    <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
-	    {% endif %}
 	  </div>
 	</div>
 	<!-- ./panel footer -->
+	{% endif %}
 	
-      </div>
-      <!-- ./panel -->
-    </div>
-    <!-- ./column -->
+      </div><!-- /.panel -->
+    </div> <!-- /.column -->
     {% endfor %}
-</div>
-<!-- ./row -->
+  </div>
+</div><!-- /.row -->
 {% endblock content %}
