@@ -9,17 +9,17 @@
   <hr>
   <div class="panel-group" id="accordion1">
     {% for item in lists %}
-    <div style="padding-bottom: 4px;" class="col-md-4">
+    <div style="padding-bottom: 4px;" class="col-md-4 col-sm-6 ">
       <div class="panel panel-info pln app">
 	
 	<!-- panel header -->
 	<div style="height: 82px;" class="panel-heading">
 	  <a data-toggle="collapse" data-parent="#accordion1" href="#{{ item.id }}">  
   	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-4 col-xs-4">
 		<img class="img-responsive" src="{{ item.icon }}" width="64" alt="App Icon N/A">
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-6 col-xs-6">
 		<h4 style="font-color: white;">{{ item.name }}</h4>
 	      </div>
 	    </div>
@@ -36,64 +36,64 @@
 	    <hr>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Privacy:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		<a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
 	      </div>
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Tutorial:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		<a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
 	      </div>
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		URL:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		<a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
 	      </div>
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Price:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		{{ item.price }}
 	      </div>
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Support:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		{{ item.support }}
 	      </div>
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Testimonial:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		{{ itme.testimonial }}
 	      </div>
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Functions:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		{% for function in item.functions.all %}
 		{{ function }}
 		{% if not forloop.last %},{% endif %}
@@ -102,10 +102,10 @@
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Formats:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		{% for format in item.formats.all %}
 		{{ format }}
 		{% if not forloop.last %},{% endif %}
@@ -114,10 +114,10 @@
 	    </div>
 	    
 	    <div class="row">
-	      <div class="col-md-3">
+	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Types:
 	      </div>
-	      <div class="col-md-9">
+	      <div class="col-md-9 col-sm-4 col-xs-4">
 		{% for type in item.types.all %}
 		{{ type }}
 		{% if not forloop.last %},{% endif %}
