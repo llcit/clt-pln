@@ -52,14 +52,20 @@ def app_delete(request, item_id):
     app.delete()
     
     return redirect('/pln')
-                            
+# option list for nav
+def options(request):
+    formats = Format.objects.all()
+    functions = Function.objects.all()
+    types = Type.objects.all()
+    return render(request, 'pln/base.html', {'formats':formats, 'functions':functions, 'types':types})
+
 # format controllers
 def formats(request):
     try:
-        lists = Format.objects.all()
+        formats = Format.objects.all()
     except Format.DoesNotExist:
         raise Http404("Format does not exist.")
-    return render(request, 'pln/formats.html', {'lists': lists})
+    return render(request, 'pln/formats.html', {'formats': formats})
 
 def format(request, item_id):  
     item = get_object_or_404(Format, id=item_id)
