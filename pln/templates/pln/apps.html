@@ -9,18 +9,18 @@
   <hr>
   <div class="panel-group" id="accordion1">
     {% for item in lists %}
-    <div class="col-md-4">
+    <div style="padding-bottom: 4px;" class="col-md-4">
       <div class="panel panel-info pln app">
 	
 	<!-- panel header -->
 	<div style="height: 82px;" class="panel-heading">
 	  <a data-toggle="collapse" data-parent="#accordion1" href="#{{ item.id }}">  
-  	    <div class="media">
-	      <div class="media-left">
-		<img class="img-responsive" src="{{ item.icon }}" alt="App Icon N/A">
+  	    <div class="row">
+	      <div class="col-md-3">
+		<img class="img-responsive" src="{{ item.icon }}" width="64" alt="App Icon N/A">
 	      </div>
-	      <div class="media-body">
-		<h4 style="font-color: white;" class="media-heading">{{ item.name }}</h4>
+	      <div class="col-md-9">
+		<h4 style="font-color: white;">{{ item.name }}</h4>
 	      </div>
 	    </div>
 	  </a>

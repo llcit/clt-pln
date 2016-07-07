@@ -7,18 +7,17 @@
 
       <!-- panel header -->
       <div style="height: 78px;" class="panel-heading">
-	<div class="media">
-	  <div class="media-left">
+	<div class="row">
+	  <div class="col-md-2">
 	    <a href="{{ item.url }}">
 	      <img class="img-responsive pln app icon" src="{{ item.icon }}" width="64" alt="App Icon N/A">
 	    </a>
 	  </div>
-	  <div class="media-body">
+	  <div class="col-md-10">
 	    <h4 class="media-heading">{{ item.name }}</h4>
 	  </div>
 	</div>
-      </div>
-      <!-- ./panel header -->
+      </div> <!-- /.panel header -->
 
       <!-- panel body -->
       <div  class="panel-body">
@@ -26,64 +25,64 @@
 	<hr>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Privacy:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    <a href="{{ item.privacy }}">{{ item.privacy }}</a>
 	  </div>
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Tutorial:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    <a href="{{ item.tutorial }}">{{ item.tutorial }}</a>
 	  </div>
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    URL:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    <a href="{{ item.url }}">{{ item.url }}</a>
 	  </div>
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Price:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    {{ item.price }}
 	  </div>
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Support:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    {{ item.support }}
 	  </div>
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Testimonial:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    {{ itme.testimonial }}
 	  </div>
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Functions:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    {% for function in item.functions.all %}
 	    {{ function }}
 	    {% if not forloop.last %},{% endif %}
@@ -92,10 +91,10 @@
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Formats:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    {% for format in item.formats.all %}
 	    {{ format }}
 	    {% if not forloop.last %},{% endif %}
@@ -104,18 +103,17 @@
 	</div>
 
 	<div class="row">
-	  <div class="col-md-3">
+	  <div class="col-md-2">
 	    Types:
 	  </div>
-	  <div class="col-md-9">
+	  <div class="col-md-10">
 	    {% for type in item.types.all %}
 	    {{ type }}
 	    {% if not forloop.last %},{% endif %}
 	    {% endfor %}
 	  </div>
 	</div>
-      </div>
-      <!-- ./panel body -->
+      </div><!-- /.panel body -->
 
       <!-- panel footer -->
       <div class="panel-footer">
@@ -125,13 +123,8 @@
 	  <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
 	  {% endif %}
 	</div>
-      </div>
-      <!-- ./panel footer -->
-      
-    </div>
-    <!-- ./panel -->
-  </div>
-  <!-- ./column -->
-</div>
-<!-- row -->
+      </div><!-- /.panel footer -->  
+    </div><!-- /.panel -->
+  </div><!-- /.column -->
+</div><!-- /.row -->
 {% endblock %}
