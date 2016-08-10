@@ -52,6 +52,7 @@ def app_delete(request, item_id):
     app.delete()
     
     return redirect('/pln')
+
 # option list for nav
 def options(request):
     formats = Format.objects.all()
