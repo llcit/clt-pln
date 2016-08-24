@@ -1,28 +1,21 @@
 {% extends 'pln/base.html' %}
-
+<!-- content  -->
 {% block content %}
 <!-- Page Contents -->
-<div class="row">
-  
-  <!-- accordion -->
-  <a href="#" class="btn btn-primary btn-sm openall">open all</a> <a href="#" class="btn btn-primary btn-sm closeall">close all</a>
+
+<div class="row apps">
+  <!-- collapse -->
   <hr>
-  <div class="panel-group" id="accordion1">
-    {% for item in lists %}
-    <div style="padding-bottom: 4px;" class="col-md-4 col-sm-6 ">
-      <div class="panel panel-info pln app">
-	
+  <div class="panel-group" id="accordion">
+    {% for item in apps %}
+    <div style="padding-bottom: 4px;" class="col-md-4 col-sm-4">
+      <div class="panel panel-info">
+
 	<!-- panel header -->
-	<div style="height: 82px;" class="panel-heading">
-	  <a data-toggle="collapse" data-parent="#accordion1" href="#{{ item.id }}">  
-  	    <div class="row">
-	      <div class="col-md-3 col-sm-4 col-xs-4">
-		<img class="img-responsive" src="{{ item.icon }}" width="64" alt="App Icon N/A">
-	      </div>
-	      <div class="col-md-9 col-sm-6 col-xs-6">
-		<h4 style="font-color: white;">{{ item.name }}</h4>
-	      </div>
-	    </div>
+	<div class="panel-heading" style="height: 48px;" >
+	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{ item.id }}">
+	    <img class="img-responsive" src="{{ item.icon }}" alt="N/A" style="float:right;width:32px;">
+	    <h5><i class="icon-angle-down"></i>  {{ item.name }}</h5>
 	  </a>
 	</div>
 	<!-- /.panel header -->
@@ -34,7 +27,7 @@
 	    {{ item.description }}
 	    <a href="{% url 'app' item_id=item.id %}"> Read More</a>
 	    <hr>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Privacy:
@@ -43,7 +36,7 @@
 		<a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Tutorial:
@@ -52,7 +45,7 @@
 		<a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		URL:
@@ -61,7 +54,7 @@
 		<a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Price:
@@ -70,7 +63,7 @@
 		{{ item.price }}
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Support:
@@ -79,7 +72,7 @@
 		{{ item.support }}
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Testimonial:
@@ -88,7 +81,7 @@
 		{{ itme.testimonial }}
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Functions:
@@ -100,7 +93,7 @@
 		{% endfor %}
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Formats:
@@ -112,7 +105,7 @@
 		{% endfor %}
 	      </div>
 	    </div>
-	    
+
 	    <div class="row">
 	      <div class="col-md-3 col-sm-3 col-xs-3">
 		Types:
@@ -127,7 +120,7 @@
 	  </div>
 	  <!-- /.panel body -->
 	</div><!-- /.panel-collapse -->
-	
+
 	{% if user.is_authenticated %}
 	<!-- panel footer -->
 	<div class="panel-footer">
@@ -138,10 +131,72 @@
 	</div>
 	<!-- ./panel footer -->
 	{% endif %}
-	
+
       </div><!-- /.panel -->
     </div> <!-- /.column -->
     {% endfor %}
   </div>
 </div><!-- /.row -->
 {% endblock content %}
+<!-- /.contents  -->
+
+{% block filter %}
+
+<h2> PLN Tool Browser</h2>
+<p>What is a PLN?</p>
+
+<!-- all tools collapse or -->
+<div class="row">
+    <a href="#" class="btn btn-info btn-sm pull-right openall"  style="margin-left:5px">Open all tools</a>
+    <a href="#" class="btn btn-info btn-sm pull-right closeall">Close all tools</a>
+</div><!-- /.end toolscollapse or -->
+<br>
+<!-- functions -->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Functions</h3>
+  </div>
+  <div class="panel-body">
+    {% for item in functions %}
+    <input class="checkbox-primary" type="checkbox" name="function_chk" value="{{ item.name }}" checked> {{item.name }}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- formats -->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Formats</h3>
+  </div>
+  <div class="panel-body">
+    {% for item in formats %}
+    <input class="checkbox-primary" type="checkbox" name"format_chk" value="{{ item.name }}" checked > {{ item.name }}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+<!-- type -->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Types</h3>
+  </div>
+  <div class="panel-body">
+    {% for item in types %}
+    <input class="checkbox-promary" type="checkbox" name="type_chk" value="{{ item.name }}" checked> {{ item.name }}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+$('.closeall').click(function(){
+  $('.panel-collapse.in')
+    .collapse('hide');
+});
+$('.openall').click(function(){
+  $('.panel-collapse:not(".in")')
+    .collapse('show');
+});
+</script>
+{% endblock %}

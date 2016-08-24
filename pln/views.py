@@ -6,14 +6,18 @@ from .forms import *
 # app controllers
 def apps(request):
     try:
-        lists = App.objects.all()
+        apps = App.objects.all()
+        formats = Format.objects.all()
+        functions = Function.objects.all()
+        types = Type.objects.all()
+        
     except App.DoesNotExist:
         raise Http404("Application does not exist.")
-    return render(request, 'pln/apps.html', {'lists': lists})
+    return render(request, 'pln/apps.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types})
 
 def app(request, item_id):
     item = get_object_or_404(App, id=item_id)
-    return render(request, 'pln/app.html', {'item': item})
+    return render(request, 'pln/app.html', {'app': item})
 
 def app_new(request):
     if not request.user.is_authenticated():
@@ -52,13 +56,6 @@ def app_delete(request, item_id):
     app.delete()
     
     return redirect('/pln')
-
-# option list for nav
-def options(request):
-    formats = Format.objects.all()
-    functions = Function.objects.all()
-    types = Type.objects.all()
-    return render(request, 'pln/base.html', {'formats':formats, 'functions':functions, 'types':types})
 
 # format controllers
 def formats(request):

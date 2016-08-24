@@ -9,19 +9,19 @@
       <div style="height: 78px;" class="panel-heading">
 	<div class="row">
 	  <div class="col-sm-2 col-xs-2">
-	    <a href="{{ item.url }}">
-	      <img class="img-responsive pln app icon" src="{{ item.icon }}" width="64" alt="App Icon N/A">
+	    <a href="{{ app.url }}">
+	      <img class="img-responsive pln app icon" src="{{ app.icon }}" width="64" alt="App Icon N/A">
 	    </a>
 	  </div>
 	  <div class="col-sm-10 col-xs-10">
-	    <h4 class="media-heading">{{ item.name }}</h4>
+	    <h4 class="media-heading">{{ app.name }}</h4>
 	  </div>
 	</div>
       </div> <!-- /.panel header -->
 
       <!-- panel body -->
       <div  class="panel-body">
-	{{ item.description }}
+	{{ app.description }}
 	<hr>
 
 	<div class="row">
@@ -29,7 +29,7 @@
 	    Privacy:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    <a href="{{ item.privacy }}">{{ item.privacy }}</a>
+	    <a href="{{ app.privacy }}">{{ app.privacy }}</a>
 	  </div>
 	</div>
 
@@ -38,7 +38,7 @@
 	    Tutorial:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    <a href="{{ item.tutorial }}">{{ item.tutorial }}</a>
+	    <a href="{{ app.tutorial }}">{{ app.tutorial }}</a>
 	  </div>
 	</div>
 
@@ -47,7 +47,7 @@
 	    URL:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    <a href="{{ item.url }}">{{ item.url }}</a>
+	    <a href="{{ app.url }}">{{ app.url }}</a>
 	  </div>
 	</div>
 
@@ -56,7 +56,7 @@
 	    Price:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    {{ item.price }}
+	    {{ app.price }}
 	  </div>
 	</div>
 
@@ -65,7 +65,7 @@
 	    Support:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    {{ item.support }}
+	    {{ app.support }}
 	  </div>
 	</div>
 
@@ -83,7 +83,7 @@
 	    Functions:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    {% for function in item.functions.all %}
+	    {% for function in app.functions.all %}
 	    {{ function }}
 	    {% if not forloop.last %},{% endif %}
 	    {% endfor %}
@@ -95,7 +95,7 @@
 	    Formats:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    {% for format in item.formats.all %}
+	    {% for format in app.formats.all %}
 	    {{ format }}
 	    {% if not forloop.last %},{% endif %}
 	    {% endfor %}
@@ -107,7 +107,7 @@
 	    Types:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    {% for type in item.types.all %}
+	    {% for type in app.types.all %}
 	    {{ type }}
 	    {% if not forloop.last %},{% endif %}
 	    {% endfor %}
@@ -119,8 +119,8 @@
       <div class="panel-footer">
 	<div class="admin-menu">
 	  {% if user.is_authenticated %}
-	  <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
-	  <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
+	  <a class="btn btn-info" href="{% url 'app_edit' app_id=app.id %}">Edit</a>
+	  <a class="btn btn-danger" href="{% url 'app_delete' app_id=app.id %}">Delete</a>
 	  {% endif %}
 	</div>
       </div><!-- /.panel footer -->  
