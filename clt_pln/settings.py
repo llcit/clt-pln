@@ -25,7 +25,7 @@ DB_PASSWORD = os.getenv('CLT_DB_PASSWORD')
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'meh8a(pf7tp9j)6j=nb8dm(fb7jhxz!_ri0)ypzwea-po3pjf6'
+SECRET_KEY = 'YourSecretKeyHere'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
