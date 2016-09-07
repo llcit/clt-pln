@@ -10,9 +10,9 @@ def apps(request):
         formats = Format.objects.all()
         functions = Function.objects.all()
         types = Type.objects.all()
-        
     except App.DoesNotExist:
         raise Http404("Application does not exist.")
+
     return render(request, 'pln/apps.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types})
 
 def app(request, item_id):
@@ -54,7 +54,7 @@ def app_delete(request, item_id):
 
     app = get_object_or_404(App, id=item_id)
     app.delete()
-    
+
     return redirect('/pln')
 
 # format controllers
@@ -65,7 +65,7 @@ def formats(request):
         raise Http404("Format does not exist.")
     return render(request, 'pln/formats.html', {'formats': formats})
 
-def format(request, item_id):  
+def format(request, item_id):
     item = get_object_or_404(Format, id=item_id)
     return render(request, 'pln/format.html', {'item': item})
 
@@ -104,7 +104,7 @@ def format_delete(request, item_id):
 
     format = get_object_or_404(Format, id=item_id)
     format.delete()
-    
+
     return redirect('/pln/formats')
 
 # function controllers
@@ -154,7 +154,7 @@ def function_delete(request, item_id):
 
     function = get_object_or_404(App, id=item_id)
     function.delete()
-    
+
     return redirect('/pln/functions')
 
 # type controlers
@@ -205,5 +205,5 @@ def type_delete(request, item_id):
 
     type = get_object_or_404(App, id=item_id)
     type.delete()
-    
+
     return redirect('/pln/types')
