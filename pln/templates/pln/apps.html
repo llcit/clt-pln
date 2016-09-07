@@ -160,14 +160,14 @@
 <script>
 $(document).on('click', '.closeall', function(e){
   $('.panel-collapse.in').collapse('hide');
-  $('.panel-heading span.clickable').addClass('panel-collapsed');
-  $('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+  $('.panel-heading span.clickable').removeClass('panel-collapsed');
+  $('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
 });
 
 $(document).on('click', '.openall', function(e){
   $('.panel-collapse:not(".in")').collapse('show');
-  $('.panel-heading span.clickable').removeClass('panel-collapsed');
-  $('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+  $('.panel-heading span.clickable').addClass('panel-collapsed');
+  $('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
 });
 
 $(document).on('click', '.panel-heading span.clickable', function(e){
@@ -210,7 +210,7 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
   </div>
   <div class="panel-body">
     {% for item in formats %}
-    <input class="checkbox-primary" type="checkbox" name"format_chk" value="{{ item.name | cut:" " | lower }}" checked > {{ item.name }}
+    <input class="checkbox-primary" type="checkbox" name="format_chk" value="{{ item.name | cut:" " | lower }}" checked > {{ item.name }}
     <br>
     {% endfor %}
   </div>
@@ -230,27 +230,38 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 
 <script>
 {% for i in functions %}
-$('input[type="checkbox"]').click(function(){
-    if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
-        $(".{{ i.name | cut:" " | lower }}").toggle(this.checked);
-    }
-});
+    $('input[type="checkbox"]').click(function(){
+        if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
+            $(".{{ i.name | cut:" " | lower }}").toggle("slow", function() {
+
+            });
+        }
+    });
 {% endfor %}
 
 {% for i in formats %}
-$('input[type="checkbox"]').click(function(){
-    if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
-        $(".{{ i.name | cut:" " | lower }}").toggle(this.checked);
-    }
-});
+    $('input[type="checkbox"]').click(function(){
+        if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
+            $(".{{ i.name | cut:" " | lower }}").toggle("slow", function() {
+
+            });
+        }
+    });
 {% endfor %}
 
 {% for i in types %}
-$('input[type="checkbox"]').click(function(){
-    if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
-        $(".{{ i.name | cut:" " | lower }}").toggle(this.checked);
-    }
-});
+    $('input[type="checkbox"]').click(function(){
+        if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
+            $(".{{ i.name | cut:" " | lower }}").toggle("slow", function() {
+
+            });
+        }
+    });
 {% endfor %}
+
+
+
 </script>
+
+
 {% endblock %}
