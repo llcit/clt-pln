@@ -61,157 +61,143 @@
     <a href="#" class="btn btn-info btn-sm pull-right closeall">Close all tools</a>
 </div><!-- /.end toolscollapse or -->
 <hr>
-<!-- filtering check log -->
 
-<pre id=result>Include items</pre><!-- /. filtering check log -->
-
-<div class="row apps">
+<div class="rows">
   <!-- collapse -->
-  <div class="panel-group" id="accordion">
+  <div class="apps panel-group" id="accordion">
     {% for item in apps %}
-    <div class="col-md-4 col-sm-4">
-      <div class="app panel panel-info" data-id="{{ item.name }}" data-category ="
-      {% for format in item.formats.all %}
-        {{ format | cut:" " | lower }}
-      {% endfor %}
-      {% for function in item.functions.all %}
-          {{ function | cut:" " | lower }}
-      {% endfor %}
-      {% for type in item.types.all %}
-          {{ type | cut:" " | lower }}
-      {% endfor %}
-      ">
+        <!-- each item start -->
+        <div class="col-md-4 col-sm-4">
+            <div class="app panel panel-info" data-id="{{ item.name }}" data-category ="{% for format in item.formats.all %}{{ format | cut:" " | lower }} {% endfor %}{% for function in item.functions.all %}{{ function | cut:" " | lower }} {% endfor %}{% for type in item.types.all %}{{ type | cut:" " | lower }} {% endfor %}">
 
-	<!-- panel header -->
-	<div class="panel-heading" >
-	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{ item.id }}">
-        <span class="clickable">
-	        <img class="img-responsive" src="{{ item.icon }}" alt="N/A" style="float:left;width:32px;">
-	        <h5>{{ item.name }}
-            <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h5>
-        </span>
-	  </a>
-	</div>
-	<!-- /.panel header -->
+            	<!-- panel header -->
+            	<div class="panel-heading" >
+            	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{ item.id }}">
+                    <span class="clickable">
+            	        <img class="img-responsive" src="{{ item.icon }}" alt="N/A" style="float:left;width:32px;">
+            	        <h5>{{ item.name }}
+                        <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h5>
+                    </span>
+            	  </a>
+            	</div><!-- /.panel header -->
 
-	<!-- collapse -->
-	<div id="{{ item.id }}" class="panel-collapse collapse">
-	  <!-- panel body -->
-	  <div class="panel-body">
-	    {{ item.description }}
-	    <a href="{% url 'app' item_id=item.id %}"> Read More</a>
-	    <hr>
+            	<!-- collapse -->
+            	<div id="{{ item.id }}" class="panel-collapse collapse">
+            	  <!-- panel body -->
+            	  <div class="panel-body">
+            	    {{ item.description }}
+            	    <a href="{% url 'app' item_id=item.id %}"> Read More</a>
+            	    <hr>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Privacy:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		<a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Privacy:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		<a href="{{ item.privacy }}">{{ item.privacy | truncatechars:25 }}</a>
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Tutorial:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		<a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Tutorial:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		<a href="{{ item.tutorial }}">{{ item.tutorial | truncatechars:25 }}</a>
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		URL:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		<a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		URL:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		<a href="{{ item.url }}">{{ item.url | truncatechars:25 }}</a>
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Price:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		{{ item.price }}
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Price:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		{{ item.price }}
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Support:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		{{ item.support }}
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Support:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		{{ item.support }}
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Testimonial:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		{{ itme.testimonial }}
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Testimonial:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		{{ itme.testimonial }}
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Functions:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		{% for function in item.functions.all %}
-		    {{ function }}
-		    {% if not forloop.last %},{% endif %}
-		{% endfor %}
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Functions:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		{% for function in item.functions.all %}
+            		    {{ function }}
+            		    {% if not forloop.last %},{% endif %}
+            		{% endfor %}
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Formats:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		{% for format in item.formats.all %}
-		    {{ format }}
-		    {% if not forloop.last %},{% endif %}
-		{% endfor %}
-	      </div>
-	    </div>
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Formats:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		{% for format in item.formats.all %}
+            		    {{ format }}
+            		    {% if not forloop.last %},{% endif %}
+            		{% endfor %}
+            	      </div>
+            	    </div>
 
-	    <div class="row">
-	      <div class="col-md-3 col-sm-3 col-xs-3">
-		Types:
-	      </div>
-	      <div class="col-md-9 col-sm-4 col-xs-4">
-		{% for type in item.types.all %}
-		    {{ type }}
-		    {% if not forloop.last %},{% endif %}
-		{% endfor %}
-	      </div>
-	    </div>
-	  </div>
-	  <!-- /.panel body -->
-	</div><!-- /.panel-collapse -->
+            	    <div class="row">
+            	      <div class="col-md-3 col-sm-3 col-xs-3">
+            		Types:
+            	      </div>
+            	      <div class="col-md-9 col-sm-4 col-xs-4">
+            		{% for type in item.types.all %}
+            		    {{ type }}
+            		    {% if not forloop.last %},{% endif %}
+            		{% endfor %}
+            	      </div>
+            	    </div>
+            	  </div>
+            	  <!-- /.panel body -->
+            	</div><!-- /.panel-collapse -->
 
-	{% if user.is_authenticated %}
-	<!-- panel footer -->
-	<div class="panel-footer">
-	  <div class="admin-menu">
-	    <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
-	    <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
-	  </div>
-	</div>
-	<!-- ./panel footer -->
-	{% endif %}
+            	{% if user.is_authenticated %}
+                	<!-- panel footer -->
+                	<div class="panel-footer">
+                	  <div class="admin-menu">
+                	    <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
+                	    <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
+                	  </div>
+                	</div><!-- ./panel footer -->
+            	{% endif %}
 
-      </div><!-- /.panel -->
-    </div> <!-- /.column -->
+            </div><!-- /.panel -->
+        </div> <!-- /.column -->
     {% endfor %}
-  </div>
-</div><!-- /.row -->
-<!-- collapseAll -->
+  </div><!-- collapse -->
+</div><!-- /.rows -->
+
 <script>
 $(document).on('click', '.closeall', function(e){
   $('.panel-collapse.in').collapse('hide');
@@ -236,127 +222,40 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 
-var byProperty = [], byFunction = [], byType = [];
+var $filterCheckboxes = $('input[type="checkbox"]');
 
-		$("input[name=app-function]").on( "change", function() {
-			if (this.checked) byProperty.push("[data-category~='" + $(this).attr("value") + "']");
-			else removeA(byProperty, "[data-category~='" + $(this).attr("value") + "']");
-		});
+$filterCheckboxes.on('change', function() {
 
-		$("input[name=app-format]").on( "change", function() {
-			if (this.checked) byFunction.push("[data-category~='" + $(this).attr("value") + "']");
-			else removeA(byFunction, "[data-category~='" + $(this).attr("value") + "']");
-		});
+  var selectedFilters = {};
 
-		$("input[name=app-type]").on( "change", function() {
-			if (this.checked) byType.push("[data-category~='" + $(this).attr("value") + "']");
-			else removeA(byType, "[data-category~='" + $(this).attr("value") + "']");
-		});
+  $filterCheckboxes.filter(':checked').each(function() {
 
-		$("input").on( "change", function() {
-			var str = "Include items \n";
-			var selector = '', cselector = '', nselector = '';
+    if (!selectedFilters.hasOwnProperty(this.name)) {
+      selectedFilters[this.name] = [];
+    }
 
-			var $lis = $('.apps > div'),
-				$checked = $('input:checked');
+    selectedFilters[this.name].push(this.value);
 
-			if ($checked.length) {
+  });
 
-				if (byProperty.length) {
-					if (str == "Include items \n") {
-						str += "    " + "with (" +  byProperty.join(',') + ")\n";
-						$($('input[name=app-function]:checked')).each(function(index, byProperty){
-							if(selector === '') {
-								selector += "[data-category~='" + byProperty.id + "']";
-							} else {
-								selector += ",[data-category~='" + byProperty.id + "']";
-							}
-						});
-					} else {
-						str += "    AND " + "with (" +  byProperty.join(' OR ') + ")\n";
-						$($('input[name=app-format]:checked')).each(function(index, byProperty){
-							selector += "[data-category~='" + byProperty.id + "']";
-						});
-					}
-				}
+  // Filter
+  var $filteredResults = $('.app');
+  $.each(selectedFilters, function(name, filterValues) {
+    $filteredResults = $filteredResults.filter(function() {
+      var matched = false,
+        currentFilterValues = $(this).data('category').split(' ');
+      $.each(currentFilterValues, function(_, currentFilterValue) {
+        if ($.inArray(currentFilterValue, filterValues) != -1) {
+          matched = true;
+          return false;
+        }
+      });
+      return matched;
+    });
+  });
 
-				if (byFunction.length) {
-					if (str == "Include items \n") {
-						str += "    " + "with (" +  byFunction.join(' OR ') + ")\n";
-						$($('input[name=app-format]:checked')).each(function(index, byFunction){
-							if(selector === '') {
-								selector += "[data-category~='" + byFunction.id + "']";
-							} else {
-								selector += ",[data-category~='" + byFunction.id + "']";
-							}
-						});
-					} else {
-						str += "    AND " + "with (" +  byFunction.join(' OR ') + ")\n";
-						$($('input[name=app-format]:checked')).each(function(index, byFunction){
-							if(cselector === '') {
-								cselector += "[data-category~='" + byFunction.id + "']";
-							} else {
-								cselector += ",[data-category~='" + byFunction.id + "']";
-							}
-						});
-					}
-				}
-
-				if (byType.length) {
-					if (str == "Include items \n") {
-						str += "    " + "with (" +  byType.join(' OR ') + ")\n";
-						$($('input[name=app-type]:checked')).each(function(index, byType){
-							if(selector === '') {
-								selector += "[data-category~='" + byType.id + "']";
-							} else {
-								selector += ",[data-category~='" + byType.id + "']";
-							}
-						});
-					} else {
-						str += "    AND " + "with (" +  byType.join(' OR ') + ")\n";
-						$($('input[name=app-type]:checked')).each(function(index, byType){
-							if(nselector === '') {
-								nselector += "[data-category~='" + byType.id + "']";
-							} else {
-								nselector += ",[data-category~='" + byType.id + "']";
-							}
-						});
-					}
-				}
-
-				$lis.hide();
-				console.log(selector);
-				console.log(cselector);
-				console.log(nselector);
-
-				if (cselector === '' && nselector === '') {
-					$('.apps > div').filter(selector).show();
-				} else if (cselector === '') {
-					$('.apps > div').filter(selector).filter(nselector).show();
-				} else if (nselector === '') {
-					$('.apps > div').filter(selector).filter(cselector).show();
-				} else {
-					$('.apps > div').filter(selector).filter(cselector).filter(nselector).show();
-				}
-
-			} else {
-				$lis.show();
-			}
-
-			$("#result").html(str);
-
-		});
-
-		function removeA(arr) {
-			var what, a = arguments, L = a.length, ax;
-			while (L > 1 && arr.length) {
-				what = a[--L];
-				while ((ax= arr.indexOf(what)) !== -1) {
-					arr.splice(ax, 1);
-				}
-			}
-			return arr;
-		}
+  $('.app').hide().filter($filteredResults).show();
+});
 </script><!-- /.collapseAll -->
 
 {% endblock content %}<!-- /.contents  -->

@@ -13,8 +13,9 @@ def apps(request):
     except App.DoesNotExist:
         raise Http404("Application does not exist.")
 
-    return render(request, 'pln/apps.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types})
+    return render(request, 'pln/apps.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types,})
 
+# test
 def masonry(request):
     try:
         apps = App.objects.all()
