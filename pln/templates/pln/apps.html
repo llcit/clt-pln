@@ -222,39 +222,31 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 
+// Filter function
 var $filterCheckboxes = $('input[type="checkbox"]');
-
 $filterCheckboxes.on('change', function() {
-
-  var selectedFilters = {};
-
-  $filterCheckboxes.filter(':checked').each(function() {
-
+    var selectedFilters = {};
+    $filterCheckboxes.filter(':checked').each(function() {
     if (!selectedFilters.hasOwnProperty(this.name)) {
-      selectedFilters[this.name] = [];
+        selectedFilters[this.name] = [];
     }
-
-    selectedFilters[this.name].push(this.value);
-
-  });
-
-  // Filter
-  var $filteredResults = $('.app');
-  $.each(selectedFilters, function(name, filterValues) {
-    $filteredResults = $filteredResults.filter(function() {
-      var matched = false,
-        currentFilterValues = $(this).data('category').split(' ');
-      $.each(currentFilterValues, function(_, currentFilterValue) {
-        if ($.inArray(currentFilterValue, filterValues) != -1) {
-          matched = true;
-          return false;
-        }
-      });
-      return matched;
+        selectedFilters[this.name].push(this.value);
     });
-  });
 
-  $('.app').hide().filter($filteredResults).show();
+    var $filteredResults = $('.app');
+    $.each(selectedFilters, function(name, filterValues) {
+        $filteredResults = $filteredResults.filter(function() {
+            var matched = false, currentFilterValues = $(this).data('category').split(' ');
+            $.each(currentFilterValues, function(_, currentFilterValue) {
+                if ($.inArray(currentFilterValue, filterValues) != -1) {
+                    matched = true;
+                    return false;
+                }
+            });
+            return matched;
+        });
+    });
+    $('.app').hide().filter($filteredResults).show();
 });
 </script><!-- /.collapseAll -->
 
