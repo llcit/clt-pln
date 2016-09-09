@@ -15,6 +15,17 @@ def apps(request):
 
     return render(request, 'pln/apps.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types})
 
+def masonry(request):
+    try:
+        apps = App.objects.all()
+        formats = Format.objects.all()
+        functions = Function.objects.all()
+        types = Type.objects.all()
+    except App.DoesNotExist:
+        raise Http404("Application does not exist.")
+
+    return render(request, 'pln/masonry.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types})
+
 def app(request, item_id):
     item = get_object_or_404(App, id=item_id)
     return render(request, 'pln/app.html', {'app': item})

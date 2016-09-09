@@ -1,4 +1,56 @@
 {% extends 'pln/base.html' %}
+{% load static %}
+
+<!-- css -->
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/apps.css' %}">
+{% endblock %}
+
+<!-- Filter -->
+{% block filter %}
+<h2> PLN Tool Browser</h2>
+<p>What is a PLN?</p>
+
+<br>
+<!-- functions -->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Functions</h3>
+  </div>
+  <div class="panel-body">
+    {% for item in functions %}
+    <input class="checkbox-primary" type="checkbox" name="app-function" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{item.name }}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- formats -->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Formats</h3>
+  </div>
+  <div class="panel-body">
+    {% for item in formats %}
+    <input class="checkbox-primary" type="checkbox" name="app-format" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{ item.name }}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+<!-- type -->
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">Types</h3>
+  </div>
+  <div class="panel-body">
+    {% for item in types %}
+    <input class="checkbox-primary" type="checkbox" name="app-type" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{ item.name }}
+    <br>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}<!--/. Filter -->
+
 <!-- content  -->
 {% block content %}
 <!-- Page Contents -->
@@ -8,14 +60,14 @@
     <a href="#" class="btn btn-info btn-sm pull-right openall"  style="margin-left:5px">Open all tools</a>
     <a href="#" class="btn btn-info btn-sm pull-right closeall">Close all tools</a>
 </div><!-- /.end toolscollapse or -->
+<hr>
 
 <div class="row apps">
   <!-- collapse -->
-  <hr>
-  <div class="grid panel-group" id="accordion">
+  <div class="panel-group" id="accordion">
     {% for item in apps %}
-    <div class="app grid-item col-md-4 col-sm-4">
-      <div class="panel panel-info
+    <div class="col-md-4 col-sm-4">
+      <div class="app panel panel-info" data-id="{{ item.name }}" data-category ="
       {% for format in item.formats.all %}
         {{ format | cut:" " | lower }}
       {% endfor %}
@@ -180,88 +232,128 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 		$this.find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
 	}
 })
+
+var byProperty = [], byFunction = [], byType = [];
+
+		$("input[name=app-function]").on( "change", function() {
+			if (this.checked) byProperty.push("[data-category~='" + $(this).attr("value") + "']");
+			else removeA(byProperty, "[data-category~='" + $(this).attr("value") + "']");
+		});
+
+		$("input[name=app-format]").on( "change", function() {
+			if (this.checked) byFunction.push("[data-category~='" + $(this).attr("value") + "']");
+			else removeA(byFunction, "[data-category~='" + $(this).attr("value") + "']");
+		});
+
+		$("input[name=app-type]").on( "change", function() {
+			if (this.checked) byType.push("[data-category~='" + $(this).attr("value") + "']");
+			else removeA(byType, "[data-category~='" + $(this).attr("value") + "']");
+		});
+
+		$("input").on( "change", function() {
+			var str = "Include items \n";
+			var selector = '', cselector = '', nselector = '';
+
+			var $lis = $('.apps > div'),
+				$checked = $('input:checked');
+
+			if ($checked.length) {
+
+				if (byProperty.length) {
+					if (str == "Include items \n") {
+						str += "    " + "with (" +  byProperty.join(',') + ")\n";
+						$($('input[name=app-function]:checked')).each(function(index, byProperty){
+							if(selector === '') {
+								selector += "[data-category~='" + byProperty.id + "']";
+							} else {
+								selector += ",[data-category~='" + byProperty.id + "']";
+							}
+						});
+					} else {
+						str += "    AND " + "with (" +  byProperty.join(' OR ') + ")\n";
+						$($('input[name=app-format]:checked')).each(function(index, byProperty){
+							selector += "[data-category~='" + byProperty.id + "']";
+						});
+					}
+				}
+
+				if (byFunction.length) {
+					if (str == "Include items \n") {
+						str += "    " + "with (" +  byFunction.join(' OR ') + ")\n";
+						$($('input[name=app-format]:checked')).each(function(index, byFunction){
+							if(selector === '') {
+								selector += "[data-category~='" + byFunction.id + "']";
+							} else {
+								selector += ",[data-category~='" + byFunction.id + "']";
+							}
+						});
+					} else {
+						str += "    AND " + "with (" +  byFunction.join(' OR ') + ")\n";
+						$($('input[name=app-format]:checked')).each(function(index, byFunction){
+							if(cselector === '') {
+								cselector += "[data-category~='" + byFunction.id + "']";
+							} else {
+								cselector += ",[data-category~='" + byFunction.id + "']";
+							}
+						});
+					}
+				}
+
+				if (byType.length) {
+					if (str == "Include items \n") {
+						str += "    " + "with (" +  byType.join(' OR ') + ")\n";
+						$($('input[name=app-type]:checked')).each(function(index, byType){
+							if(selector === '') {
+								selector += "[data-category~='" + byType.id + "']";
+							} else {
+								selector += ",[data-category~='" + byType.id + "']";
+							}
+						});
+					} else {
+						str += "    AND " + "with (" +  byType.join(' OR ') + ")\n";
+						$($('input[name=app-type]:checked')).each(function(index, byType){
+							if(nselector === '') {
+								nselector += "[data-category~='" + byType.id + "']";
+							} else {
+								nselector += ",[data-category~='" + byType.id + "']";
+							}
+						});
+					}
+				}
+
+				$lis.hide();
+				console.log(selector);
+				console.log(cselector);
+				console.log(nselector);
+
+				if (cselector === '' && nselector === '') {
+					$('.apps > div').filter(selector).show();
+				} else if (cselector === '') {
+					$('.apps > div').filter(selector).filter(nselector).show();
+				} else if (nselector === '') {
+					$('.apps > div').filter(selector).filter(cselector).show();
+				} else {
+					$('.apps > div').filter(selector).filter(cselector).filter(nselector).show();
+				}
+
+			} else {
+				$lis.show();
+			}
+
+			$("#result").html(str);
+
+		});
+
+		function removeA(arr) {
+			var what, a = arguments, L = a.length, ax;
+			while (L > 1 && arr.length) {
+				what = a[--L];
+				while ((ax= arr.indexOf(what)) !== -1) {
+					arr.splice(ax, 1);
+				}
+			}
+			return arr;
+		}
 </script><!-- /.collapseAll -->
 
 {% endblock content %}<!-- /.contents  -->
-
-{% block filter %}
-
-<h2> PLN Tool Browser</h2>
-<p>What is a PLN?</p>
-
-<br>
-<!-- functions -->
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Functions</h3>
-  </div>
-  <div class="panel-body">
-    {% for item in functions %}
-    <input class="checkbox-primary" type="checkbox" name="function_chk" value="{{ item.name | cut:" " | lower }}" checked> {{item.name }}
-    <br>
-    {% endfor %}
-  </div>
-</div>
-
-<!-- formats -->
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Formats</h3>
-  </div>
-  <div class="panel-body">
-    {% for item in formats %}
-    <input class="checkbox-primary" type="checkbox" name="format_chk" value="{{ item.name | cut:" " | lower }}" checked > {{ item.name }}
-    <br>
-    {% endfor %}
-  </div>
-</div>
-<!-- type -->
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Types</h3>
-  </div>
-  <div class="panel-body">
-    {% for item in types %}
-    <input class="checkbox-primary" type="checkbox" name="type_chk" value="{{ item.name | cut:" " | lower }}" checked> {{ item.name }}
-    <br>
-    {% endfor %}
-  </div>
-</div>
-
-<script>
-{% for i in functions %}
-    $('input[type="checkbox"]').click(function(){
-        if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
-            $(".{{ i.name | cut:" " | lower }}").toggle("slow", function() {
-
-            });
-        }
-    });
-{% endfor %}
-
-{% for i in formats %}
-    $('input[type="checkbox"]').click(function(){
-        if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
-            $(".{{ i.name | cut:" " | lower }}").toggle("slow", function() {
-
-            });
-        }
-    });
-{% endfor %}
-
-{% for i in types %}
-    $('input[type="checkbox"]').click(function(){
-        if($(this).attr("value")=="{{ i.name | cut:" " | lower }}"){
-            $(".{{ i.name | cut:" " | lower }}").toggle("slow", function() {
-
-            });
-        }
-    });
-{% endfor %}
-
-
-
-</script>
-
-
-{% endblock %}

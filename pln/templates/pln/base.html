@@ -31,7 +31,9 @@
     </script>
 
     <!-- Static css -->
-    <link rel="stylesheet" href="{% static 'css/pln.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block css %}
+    {% endblock %}
 
     <title>Personal Learning Network</title>
 
