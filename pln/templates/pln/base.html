@@ -64,7 +64,7 @@
 	    <li class="dropdown">
 	      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add <span class="caret"></span></a>
 	      <ul class="dropdown-menu">
-		<li><a href="{% url 'app_new' %}">App</a></li>
+		<li><a href="admin/pln/app/add/">App</a></li>
 		<li role="separator" class="divider"></li>
 		<li><a href="{% url 'format_new' %}">Format</a></li>
 		<li><a href="{% url 'function_new' %}">Function</a></li>
@@ -81,20 +81,20 @@
     <div class="container">
       <!-- filter -->
       <div class="row">
-	<div class="col-md-3 col-sm-3">
-	  <div class="filter">
-	    {% block filter %}
-	    {% endblock %}
-	  </div>
-	</div>
+        <div class="col-md-3 col-sm-3">
+          <div class="filter">
+            {% block filter %}
+            {% endblock %}
+          </div>
+        </div>
 
-	<!-- pln contents -->
-	<div class="col-md-9 col-sm-9">
-	  <div class="contents">
-	    {% block content %}
-	    {% endblock %}
-	  </div>
-	</div>
+    	<!-- pln contents -->
+    	<div class="col-md-9 col-sm-9">
+    	  <div class="contents">
+    	    {% block content %}
+    	    {% endblock %}
+    	  </div>
+    	</div>
       </div>
     </div>
   </body>

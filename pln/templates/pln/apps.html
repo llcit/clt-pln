@@ -70,12 +70,12 @@
 </div><!-- /.end toolscollapse or -->
 <hr>
 
-<div class="rows">
-  <!-- collapse -->
-  <div class="apps panel-group" id="accordion">
-    {% for item in apps %}
-        <!-- each item start -->
-        <div class="col-md-4 col-sm-4">
+<div class="apps">
+    <div class="rows">
+      <!-- collapse -->
+      <div class="panel-group">
+        {% for item in apps %}
+            <!-- panel -->
             <div class="app panel panel-info" data-id="{{ item.name }}" data-category ="{% for format in item.formats.all %}{{ format | cut:" " | lower }} {% endfor %}{% for function in item.functions.all %}{{ function | cut:" " | lower }} {% endfor %}{% for type in item.types.all %}{{ type | cut:" " | lower }} {% endfor %}">
 
             	<!-- panel header -->
@@ -186,26 +186,22 @@
             		{% endfor %}
             	      </div>
             	    </div>
-            	  </div>
-            	  <!-- /.panel body -->
+            	  </div><!-- /.panel body -->
             	</div><!-- /.panel-collapse -->
 
             	{% if user.is_authenticated %}
                 	<!-- panel footer -->
                 	<div class="panel-footer">
                 	  <div class="admin-menu">
-                	    <a class="btn btn-info" href="{% url 'app_edit' item_id=item.id %}">Edit</a>
-                	    <a class="btn btn-danger" href="{% url 'app_delete' item_id=item.id %}">Delete</a>
+                	    <a class="btn btn-info" href="admin/pln/app/{{item.id}}/">Edit</a>
                 	  </div>
                 	</div><!-- ./panel footer -->
             	{% endif %}
-
             </div><!-- /.panel -->
-        </div> <!-- /.column -->
-    {% endfor %}
-  </div><!-- collapse -->
-</div><!-- /.rows -->
-
+        {% endfor %}
+      </div><!-- collapse -->
+    </div><!-- /.rows -->
+</div>
 <script>
 $(document).on('click', '.closeall', function(e){
   $('.panel-collapse.in').collapse('hide');
