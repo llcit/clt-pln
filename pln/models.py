@@ -38,7 +38,7 @@ class App(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(null=True, blank=True)
     icon = models.CharField(max_length=255, null=True, blank=True)
-    icon_image = models.ImageField(upload_to = 'images/icon', default = 'images/icon/no-img.png')
+    icon_image = models.ImageField(upload_to='images/icon', default='images/icon/no-img.png')
     privacy = models.CharField(max_length=255, null=True, blank=True)
     tutorial = models.CharField(max_length=255, null=True, blank=True)
     url = models.CharField(max_length=255, null=True, blank=True)
