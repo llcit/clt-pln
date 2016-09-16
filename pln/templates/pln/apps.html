@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{% static 'css/apps.css' %}">
 {% endblock %}
 
-<!-- Filter -->
+<!-- Filter block-->
 {% block filter %}
 <h2> PLN Tool Browser</h2>
 <p>What is a PLN?</p>
@@ -17,52 +17,75 @@
 - Filter Usage - <br>
 1. Each categories are intersection.<br>
 2. Each properties of categories are union.<br>
-
 </div>
 
-<!-- functions -->
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Functions</h3>
-  </div>
-  <div class="panel-body">
-    {% for item in functions %}
-    <input class="checkbox-primary" type="checkbox" name="app-function" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{item.name }}
-    <br>
-    {% endfor %}
-  </div>
-</div>
+<!-- filter -->
+<div class="filter">
+    <!-- functions -->
+    <div class="panel panel-success">
+      <div class="panel-heading">
+          <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#functions">
+              <span class="clickable">
+                  <h3 class="panel-title">Functions
+                  <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h3>
+              </span>
+          </div>
+      </div>
+      <div id="functions" class="panel-collapse collapse">
+          <div class="panel-body">
+            {% for item in functions %}
+            <input class="checkbox-primary" type="checkbox" name="app-function" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{item.name }}
+            <br>
+            {% endfor %}
+          </div>
+      </div>
+    </div><!-- functions -->
 
-<!-- formats -->
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Formats</h3>
-  </div>
-  <div class="panel-body">
-    {% for item in formats %}
-    <input class="checkbox-primary" type="checkbox" name="app-format" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{ item.name }}
-    <br>
-    {% endfor %}
-  </div>
-</div>
-<!-- type -->
-<div class="panel panel-success">
-  <div class="panel-heading">
-    <h3 class="panel-title">Types</h3>
-  </div>
-  <div class="panel-body">
-    {% for item in types %}
-    <input class="checkbox-primary" type="checkbox" name="app-type" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{ item.name }}
-    <br>
-    {% endfor %}
-  </div>
-</div>
-{% endblock %}<!--/. Filter -->
+    <!-- formats -->
+    <div class="panel panel-success">
+    <div class="panel-heading">
+        <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#formats">
+            <span class="clickable">
+                <h3 class="panel-title">Formats
+                <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h3>
+            </span>
+        </div>
+    </div>
+    <div id="formats" class="panel-collapse collapse">
+        <div class="panel-body">
+          {% for item in formats %}
+          <input class="checkbox-primary" type="checkbox" name="app-function" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{item.name }}
+          <br>
+          {% endfor %}
+        </div>
+    </div>
+    </div><!-- formats -->
+
+    <!-- types -->
+    <div class="panel panel-success">
+      <div class="panel-heading">
+          <div class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#types">
+              <span class="clickable">
+                  <h3 class="panel-title">Functions
+                  <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h3>
+              </span>
+          </div>
+      </div>
+      <div id="types" class="panel-collapse collapse">
+          <div class="panel-body">
+            {% for item in types %}
+            <input class="checkbox-primary" type="checkbox" name="app-function" value="{{ item.name | cut:" " | lower }}" id="{{ item.name | cut:" " | lower }}"> {{item.name }}
+            <br>
+            {% endfor %}
+          </div>
+      </div>
+    </div><!-- functions -->
+</div><!-- filter -->
+{% endblock %}<!--/. Filter block-->
 
 <!-- content  -->
 {% block content %}
 <!-- Page Contents -->
-
 <!-- all tools collapse or -->
 <div class="row">
     <a href="#" class="btn btn-info btn-sm pull-right openall"  style="margin-left:5px">Open all tools</a>
@@ -70,7 +93,9 @@
 </div><!-- /.end toolscollapse or -->
 <hr>
 
+<!-- start apps -->
 <div class="apps">
+    <!-- rows -->
     <div class="rows">
       <!-- collapse -->
       <div class="panel-group">
@@ -81,11 +106,18 @@
             	<!-- panel header -->
             	<div class="panel-heading" >
             	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{ item.id }}">
-                    <span class="clickable">
-            	        <img class="img-responsive" src="{{ item.icon }}" alt="N/A" style="float:left;width:32px;">
-            	        <h5>{{ item.name }}
-                        <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h5>
-                    </span>
+                      <div class="row">
+                        <span class="clickable">
+                            <div class="col-md-2">
+                	            <img class="img-responsive" src="{{ item.icon }}" alt="N/A" style="float:left;width:32px;">
+                            </div>
+                            <div class="col-md-10">
+                            <h5>{{ item.name }}
+                                <span class="pull-right"><i class="glyphicon glyphicon-chevron-down"></i></span></h5>
+                            </div>
+                        </span>
+
+                      </div><!-- /. row -->
             	  </a>
             	</div><!-- /.panel header -->
 
@@ -93,7 +125,7 @@
             	<div id="{{ item.id }}" class="panel-collapse collapse">
             	  <!-- panel body -->
             	  <div class="panel-body">
-            	    {{ item.description }}
+            	    {{ item.description | truncatechars:120 }}
             	    <a href="{% url 'app' item_id=item.id %}"> Read More</a>
             	    <hr>
 
@@ -199,22 +231,26 @@
             	{% endif %}
             </div><!-- /.panel -->
         {% endfor %}
-      </div><!-- collapse -->
+    </div><!-- /.collapse -->
     </div><!-- /.rows -->
-</div>
+</div><!-- /.apps -->
+
 <script>
+// closeall
 $(document).on('click', '.closeall', function(e){
-  $('.panel-collapse.in').collapse('hide');
-  $('.panel-heading span.clickable').removeClass('panel-collapsed');
-  $('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+  $('.app > .panel-collapse.in').collapse('hide');
+  $('.app > .panel-heading span.clickable').removeClass('panel-collapsed');
+  $('.app > .panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
 });
 
+// openall
 $(document).on('click', '.openall', function(e){
-  $('.panel-collapse:not(".in")').collapse('show');
-  $('.panel-heading span.clickable').addClass('panel-collapsed');
-  $('.panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
+  $('.app > .panel-collapse:not(".in")').collapse('show');
+  $('.app > .panel-heading span.clickable').addClass('panel-collapsed');
+  $('.app > .panel-heading span.clickable').find('i').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
 });
 
+// clickable panel-heading
 $(document).on('click', '.panel-heading span.clickable', function(e){
     var $this = $(this);
 	if(!$this.hasClass('panel-collapsed')) {
@@ -226,7 +262,7 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 	}
 })
 
-// Filter function
+// Filtering
 var $filterCheckboxes = $('input[type="checkbox"]');
 $filterCheckboxes.on('change', function() {
     var selectedFilters = {};
