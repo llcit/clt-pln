@@ -6,10 +6,10 @@ from .forms import *
 # app controllers
 def apps(request):
     try:
-        apps = App.objects.all()
-        formats = Format.objects.all()
-        functions = Function.objects.all()
-        types = Type.objects.all()
+        apps = App.objects.all().order_by('name')
+        formats = Format.objects.all().order_by('name')
+        functions = Function.objects.all().order_by('name')
+        types = Type.objects.all().order_by('name')
     except App.DoesNotExist:
         raise Http404("Application does not exist.")
 
