@@ -280,7 +280,14 @@ $(document).on('click', '.filter .panel-heading span.clickable', function(e){
 $(document).ready(function(){
   var windowWidth = $(window).width();
   if(windowWidth <= 1024)
-     $('.panel-collapse').removeClass('in')
+     $('.filter > .panel > .panel-collapse').removeClass('in')
+});
+
+$(window).resize(function(){
+  var windowWidth = $(window).width();
+  if(windowWidth <= 777) $('.filter > .panel > .panel-collapse').removeClass('in')
+  if(windowWidth > 777) $('.filter > .panel > .panel-collapse').addClass('in')
+
 });
 
 // Filtering
