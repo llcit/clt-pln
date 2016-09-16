@@ -86,11 +86,13 @@
 <!-- content  -->
 {% block content %}
 <!-- Page Contents -->
+
 <!-- all tools collapse or -->
 <div class="row">
     <a href="#" class="btn btn-info btn-sm pull-right openall"  style="margin-left:5px">Open all tools</a>
     <a href="#" class="btn btn-info btn-sm pull-right closeall">Close all tools</a>
 </div><!-- /.end toolscollapse or -->
+
 <hr>
 
 <!-- start apps -->
@@ -109,7 +111,7 @@
                       <div class="row">
                         <span class="clickable">
                             <div class="col-md-2">
-                	            <img class="img-responsive" src="{{ item.icon }}" alt="N/A" style="float:left;width:32px;">
+                	            <img class="img-responsive icon" src="{% if item.icon_image %}{{ item.icon_image.name|slice:"4:" }}{% else %}{{ item.icon }}{% endif %}" alt="N/A">
                             </div>
                             <div class="col-md-10">
                             <h5>{{ item.name }}
