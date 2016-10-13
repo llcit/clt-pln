@@ -2,10 +2,10 @@ from django import forms
 from .models import *
 
 class AppForm(forms.ModelForm):
-    
+
     class Meta:
         model = App
-        fields = ('name', 'description', 'icon', 'privacy', 'tutorial', 'url', 'price', 'support', 'testimonial', 'functions', 'formats', 'types',)
+        fields = ('name', 'description', 'icon', 'privacy', 'tutorial', 'url', 'testimonial', 'applications', 'formats', 'functions', 'price', 'support', )
 
 class FormatForm(forms.ModelForm):
 
@@ -19,8 +19,8 @@ class FunctionForm(forms.ModelForm):
         model = Function
         fields =('name',)
 
-class TypeForm(forms.ModelForm):
+class ApplicationForm(forms.ModelForm):
 
     class Meta:
-        model = Type
+        model = Application
         fields = ('name',)

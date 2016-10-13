@@ -1,9 +1,0 @@
-{% for item in lists %}
-{{ item }}
-{% if user.is_authenticated %}
-<div class="pln edit">
-  <a class="btn btn-default" href="{% url 'type_edit' item_id=item.id %}">Edit</a>
-  <a class="btn btn-default" href="{% url 'type_delete' item_id=item.id %}">Delete</a>
-</div>
-{% endif %}
-{% endfor %}

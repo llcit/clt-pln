@@ -11,91 +11,52 @@
     <meta name="author" content="Songmin Kim">
 
     <!-- jQuery -->
-    <script
-      src="http://code.jquery.com/jquery-2.2.4.min.js"
-      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-      crossorigin="anonymous">
-    </script>
-
-    <!-- Bootstrap Core JavaScript -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- Bootstrap Core JavaScript and CSS -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
-    <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
     <!-- Font Awesome CSS -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
-
     <!-- Mansonry Grid -->
-    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js">
-    </script>
+    <script src="https://unpkg.com/masonry-layout@4.1/dist/masonry.pkgd.min.js"></script>
 
     <!-- Static css -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block css %}
     {% endblock %}
-
     <title>Personal Learning Network</title>
-
   </head>
+
   <body>
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
-	<!-- Brand and toggle get grouped for better mobile display -->
-	<div class="navbar-header">
-	  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#pln-navbar-collapse-1" aria-expanded="false">
-	    <span class="sr-only">Toggle navigation</span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	    <span class="icon-bar"></span>
-	  </button>
-	  <a class="navbar-brand" href="#">PLN</a>
-	</div>
-
-	<!-- Collect the nav links, forms, and other content for toggling -->
-	<div class="collapse navbar-collapse" id="pln-navbar-collapse-1">
-	  <ul class="nav navbar-nav navbar-right">
-	    {% if not user.is_authenticated %}
-	    <li><a href="/admin">Login</a></li>
-	    {% endif %}
-	    <!-- authentication check for editing -->
-	    {% if user.is_authenticated %}
-	    <li><a href="/admin/logout/">Logout</a></li>
-	    <li class="dropdown">
-	      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Add <span class="caret"></span></a>
-	      <ul class="dropdown-menu">
-		<li><a href="admin/pln/app/add/">App</a></li>
-		<li role="separator" class="divider"></li>
-		<li><a href="{% url 'format_new' %}">Format</a></li>
-		<li><a href="{% url 'function_new' %}">Function</a></li>
-		<li><a href="{% url 'type_new' %}">Type</a></li>
-	      </ul>
-	    </li>
-	    {% endif %}
-
-	  </ul>
-	</div><!-- /.navbar-collapse -->
+      	<!-- Brand and toggle get grouped for better mobile display -->
+      	<div class="navbar-header">
+      	  <a class="navbar-brand" href="#">PLN</a>
+      	</div>
+        <!-- Hamberger menu here -->
       </div><!-- /.container-fluid -->
     </nav>
 
+    <!-- container -->
     <div class="container">
-      <!-- filter -->
       <div class="row">
+        <!-- filter -->
         <div class="col-md-3 col-sm-3">
           <div class="filter">
             {% block filter %}
             {% endblock %}
           </div>
-        </div>
+        </div><!-- /.filter -->
 
-    	<!-- pln contents -->
-    	<div class="col-md-9 col-sm-9">
-    	  <div class="contents">
-    	    {% block content %}
-    	    {% endblock %}
-    	  </div>
-    	</div>
-      </div>
-    </div>
+      	<!-- pln contents -->
+      	<div class="col-md-9 col-sm-9">
+      	  <div class="contents">
+      	    {% block content %}
+      	    {% endblock %}
+      	  </div>
+      	</div><!-- /.pln content -->
+      </div><!-- /.row -->
+    </div><!-- /. container -->
   </body>
 </html>

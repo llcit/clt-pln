@@ -74,10 +74,34 @@
 	    Testimonial:
 	  </div>
 	  <div class="col-sm-6 col-xs-6">
-	    {{ itme.testimonial }}
+	    {{ item.testimonial }}
 	  </div>
 	</div>
 
+  	<div class="row">
+  	  <div class="col-sm-3 col-xs-3">
+  	    Applications:
+  	  </div>
+  	  <div class="col-sm-6 col-xs-6">
+  	    {% for application in app.applications.all %}
+  	    {{ application }}
+  	    {% if not forloop.last %},{% endif %}
+  	    {% endfor %}
+  	  </div>
+  	</div>
+
+    <div class="row">
+  	  <div class="col-sm-3 col-xs-3">
+  	    Formats:
+  	  </div>
+  	  <div class="col-sm-6 col-xs-6">
+  	    {% for format in app.formats.all %}
+  	    {{ format }}
+  	    {% if not forloop.last %},{% endif %}
+  	    {% endfor %}
+  	  </div>
+  	</div>
+    
 	<div class="row">
 	  <div class="col-sm-3 col-xs-3">
 	    Functions:
@@ -90,29 +114,6 @@
 	  </div>
 	</div>
 
-	<div class="row">
-	  <div class="col-sm-3 col-xs-3">
-	    Formats:
-	  </div>
-	  <div class="col-sm-6 col-xs-6">
-	    {% for format in app.formats.all %}
-	    {{ format }}
-	    {% if not forloop.last %},{% endif %}
-	    {% endfor %}
-	  </div>
-	</div>
-
-	<div class="row">
-	  <div class="col-sm-3 col-xs-3">
-	    Types:
-	  </div>
-	  <div class="col-sm-6 col-xs-6">
-	    {% for type in app.types.all %}
-	    {{ type }}
-	    {% if not forloop.last %},{% endif %}
-	    {% endfor %}
-	  </div>
-	</div>
       </div><!-- /.panel body -->
 
     {% if user.is_authenticated %}

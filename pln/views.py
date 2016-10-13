@@ -7,25 +7,15 @@ from .forms import *
 def apps(request):
     try:
         apps = App.objects.all().order_by('name')
+        applications = Application.objects.all().order_by('name')
         formats = Format.objects.all().order_by('name')
         functions = Function.objects.all().order_by('name')
-        types = Type.objects.all().order_by('name')
+        price = Price.objects.all().order_by('name')
+        support = Support.objects.all().order_by('name')
     except App.DoesNotExist:
         raise Http404("Application does not exist.")
 
-    return render(request, 'pln/apps.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types,})
-
-# test
-def masonry(request):
-    try:
-        apps = App.objects.all()
-        formats = Format.objects.all()
-        functions = Function.objects.all()
-        types = Type.objects.all()
-    except App.DoesNotExist:
-        raise Http404("Application does not exist.")
-
-    return render(request, 'pln/masonry.html', {'apps': apps, 'formats':formats, 'functions':functions, 'types':types})
+    return render(request, 'pln/apps.html', {'apps': apps, 'applications':applications, 'functions':functions, 'formats':formats, 'price':price, 'support':support})
 
 def app(request, item_id):
     item = get_object_or_404(App, id=item_id)
@@ -68,6 +58,57 @@ def app_delete(request, item_id):
     app.delete()
 
     return redirect('/pln')
+
+# application controlers
+def applications(request):
+    try:
+        lists = Application.objects.all()
+    except Application.DoesNotExist:
+        raise Http404("Application dose not exist.")
+    return render(request, 'pln/applications.html', {'lists': lists})
+
+
+def application(request, item_id):
+    item = get_object_or_404(Application, id=item_id)
+    return render(request, 'pln/application.html', {'item': item})
+
+def application_new(request):
+    if not request.user.is_authenticated():
+        return redirect('/admin')
+
+    if request.method == "POST":
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            application = form.save(commit=False)
+            applications.save()
+            return redirect('pln.views.application',item_id=application.id)
+    else:
+        form = ApplicationForm()
+    return render(request, 'pln/application_new.html',{'form': form})
+
+def application_edit(request, item_id):
+    if not request.user.is_authenticated():
+        return redirect('/admin')
+
+    application = get_object_or_404(Application, id=item_id)
+    if request.method == "POST":
+        form = ApplicationForm(request.POST, instance=application)
+        if form.is_valid():
+            application = form.save(commit=False)
+            application.save()
+            return redirect('pln.views.application', item_id=application.id)
+    else:
+        form = ApplicationForm(instance=application)
+    return render(request, 'pln/application_edit.html',{'form': form})
+
+def application_delete(request, item_id):
+    if not request.user.is_authenticated():
+        return redirect('/admin')
+
+    application = get_object_or_404(App, id=item_id)
+    application.delete()
+
+    return redirect('/pln/applications')
 
 # format controllers
 def formats(request):
@@ -168,54 +209,3 @@ def function_delete(request, item_id):
     function.delete()
 
     return redirect('/pln/functions')
-
-# type controlers
-def types(request):
-    try:
-        lists = Type.objects.all()
-    except Type.DoesNotExist:
-        raise Http404("Type dose not exist.")
-    return render(request, 'pln/types.html', {'lists': lists})
-
-
-def type(request, item_id):
-    item = get_object_or_404(Type, id=item_id)
-    return render(request, 'pln/type.html', {'item': item})
-
-def type_new(request):
-    if not request.user.is_authenticated():
-        return redirect('/admin')
-
-    if request.method == "POST":
-        form = TypeForm(request.POST)
-        if form.is_valid():
-            type = form.save(commit=False)
-            type.save()
-            return redirect('pln.views.type',item_id=type.id)
-    else:
-        form = TypeForm()
-    return render(request, 'pln/type_new.html',{'form': form})
-
-def type_edit(request, item_id):
-    if not request.user.is_authenticated():
-        return redirect('/admin')
-
-    type = get_object_or_404(Type, id=item_id)
-    if request.method == "POST":
-        form = TypeForm(request.POST, instance=type)
-        if form.is_valid():
-            type = form.save(commit=False)
-            type.save()
-            return redirect('pln.views.type', item_id=type.id)
-    else:
-        form = TypeForm(instance=type)
-    return render(request, 'pln/type_edit.html',{'form': form})
-
-def type_delete(request, item_id):
-    if not request.user.is_authenticated():
-        return redirect('/admin')
-
-    type = get_object_or_404(App, id=item_id)
-    type.delete()
-
-    return redirect('/pln/types')

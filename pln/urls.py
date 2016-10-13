@@ -5,7 +5,7 @@ urlpatterns = [
     url(r'^$', views.apps, name='apps'),
     url(r'^functions/$', views.functions, name='functions'),
     url(r'^formats/$', views.formats, name='formats'),
-    url(r'^types/$', views.types, name='types'),
+    url(r'^applications/$', views.applications, name='applications'),
 
     url(r'^app/(?P<item_id>[0-9]+)/$', views.app, name='app'),
     url(r'^app/new/$', views.app_new, name='app_new'),
@@ -22,13 +22,12 @@ urlpatterns = [
     url(r'^function/(?P<item_id>[0-9]+)/edit/$', views.function_edit, name='function_edit'),
     url(r'^function/(?P<item_id>[0-9]+)/delete/$', views.function_delete, name='function_delete'),
 
-    url(r'^type/(?P<item_id>[0-9]+)/$', views.type, name='type'),
-    url(r'^type/new/$', views.type_new, name='type_new'),
-    url(r'^type/(?P<item_id>[0-9]+)/edit/$', views.type_edit, name='type_edit'),
-    url(r'^type/(?P<item_id>[0-9]+)/delete/$', views.type_delete, name='type_delete'),
+    url(r'^application/(?P<item_id>[0-9]+)/$', views.application, name='application'),
+    url(r'^application/new/$', views.application_new, name='application_new'),
+    url(r'^application/(?P<item_id>[0-9]+)/edit/$', views.application_edit, name='application_edit'),
+    url(r'^application/(?P<item_id>[0-9]+)/delete/$', views.application_delete, name='application_delete'),
 
-    url(r'^masonry', views.masonry, name='mansory'),
-    url(r'^functions/$', views.functions, name='functions'),
+    url(r'^applications/$', views.applications, name='applications'),
     url(r'^formats/$', views.formats, name='formats'),
-    url(r'^types/$', views.types, name='types'),
+    url(r'^functions/$', views.functions, name='functions'),
 ]

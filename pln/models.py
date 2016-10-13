@@ -5,6 +5,14 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 
 # Create your models here.
+@python_2_unicode_compatible
+class Application(models.Model):
+    name = models.CharField(max_length=255)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
 
 @python_2_unicode_compatible
 class Format(models.Model):
@@ -19,16 +27,25 @@ class Format(models.Model):
 class Function(models.Model):
     name = models.CharField(max_length=255)
     created_date = models.DateTimeField(auto_now_add=True)
-    updated_date= models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
 
 @python_2_unicode_compatible
-class Type(models.Model):
+class Price(models.Model):
     name = models.CharField(max_length=255)
     created_date = models.DateTimeField(auto_now_add=True)
-    updated_date= models.DateTimeField(auto_now=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+@python_2_unicode_compatible
+class Support(models.Model):
+    name = models.CharField(max_length=255)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -42,12 +59,12 @@ class App(models.Model):
     privacy = models.CharField(max_length=255, null=True, blank=True)
     tutorial = models.CharField(max_length=255, null=True, blank=True)
     url = models.CharField(max_length=255, null=True, blank=True)
-    price = models.CharField(max_length=255, null=True, blank=True)
-    support = models.CharField(max_length=255, null=True, blank=True)
     testimonial = models.CharField(max_length=255, null=True, blank=True)
+    applications = models.ManyToManyField(Application)
     formats = models.ManyToManyField(Format)
     functions = models.ManyToManyField(Function)
-    types = models.ManyToManyField(Type)
+    price = models.ManyToManyField(Price)
+    support = models.ManyToManyField(Support)
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date= models.DateTimeField(auto_now=True)
 

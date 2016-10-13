@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Database information, chnage your own database connection information
-DB_NAME = os.getenv('CLT_DB_NAME')
+DB_NAME = os.getenv('CLT_PLN_DB')
 DB_USER = os.getenv('CLT_DB_USER')
 DB_PASSWORD = os.getenv('CLT_DB_PASSWORD')
 
