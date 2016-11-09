@@ -139,7 +139,7 @@
       <div class="panel-group">
         {% for item in all_apps %}
             <!-- panel -->
-            <div class="app panel panel-info" data-id="{{ item.name }}" data-category ="{% for application in item.application.all %}{{ application | cut:" " | lower }} {% endfor %}{% for format in item.format.all %}{{ format | cut:" " | lower }} {% endfor %}{% for function in item.function.all %}{{ function | cut:" " | lower }} {% endfor %}{% for price in item.price.all %}{{ price | cut:" " | lower }} {% endfor %}{% for support in item.support.all %}{{ support | cut:" " | lower }} {% endfor %}">
+            <div class="app panel" data-id="{{ item.name }}" data-category ="{% for application in item.application.all %}{{ application | cut:" " | lower }} {% endfor %}{% for format in item.format.all %}{{ format | cut:" " | lower }} {% endfor %}{% for function in item.function.all %}{{ function | cut:" " | lower }} {% endfor %}{% for price in item.price.all %}{{ price | cut:" " | lower }} {% endfor %}{% for support in item.support.all %}{{ support | cut:" " | lower }} {% endfor %}">
             	<!-- panel header -->
             	<div class="panel-heading" >
             	  <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#{{ item.id }}">
